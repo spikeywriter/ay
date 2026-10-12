@@ -1,0 +1,125 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        forest: {
+          50: '#e8efed',
+          100: '#c5d4ce',
+          200: '#9bb5ab',
+          300: '#6f8e80',
+          400: '#4a6b5a',
+          500: '#2d4f3e',
+          600: '#1e3a2e',
+          700: '#142d27',
+          800: '#0f241f',
+          900: '#0a1814',
+        },
+        ivory: {
+          50: '#fdfbf7',
+          100: '#faf5ec',
+          200: '#f6f1e8',
+          300: '#ede4d3',
+          400: '#dccfb4',
+          500: '#c9b894',
+        },
+        gold: {
+          50: '#faf6ee',
+          100: '#f0e6d0',
+          200: '#e0cd9e',
+          300: '#d4ba80',
+          400: '#c5a46d',
+          500: '#b8915a',
+          600: '#a07a4a',
+          700: '#83623c',
+          800: '#6b5034',
+          900: '#5a442e',
+        },
+        charcoal: {
+          50: '#f3f4f3',
+          100: '#e0e2e0',
+          200: '#c3c6c3',
+          300: '#9a9e9a',
+          400: '#6b6f6b',
+          500: '#4a4e4a',
+          600: '#363a37',
+          700: '#202321',
+          800: '#171a18',
+          900: '#0d0f0d',
+        },
+        sage: {
+          50: '#f4f6f4',
+          100: '#e6ebe6',
+          200: '#cdd7cd',
+          300: '#a9b5a7',
+          400: '#8b9b89',
+          500: '#6f806d',
+          600: '#586857',
+          700: '#475547',
+          800: '#3a453a',
+          900: '#303930',
+        },
+      },
+      fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        'display-1': ['clamp(3rem, 8vw, 6.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-2': ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
+        'display-3': ['clamp(2rem, 5vw, 3.75rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        'heading-1': ['clamp(1.75rem, 4vw, 3rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'heading-2': ['clamp(1.5rem, 3vw, 2.25rem)', { lineHeight: '1.2', letterSpacing: '-0.005em' }],
+        'heading-3': ['clamp(1.25rem, 2vw, 1.625rem)', { lineHeight: '1.3' }],
+        'eyebrow': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.18em' }],
+        'lead': ['clamp(1.125rem, 1.5vw, 1.375rem)', { lineHeight: '1.6' }],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+      },
+      maxWidth: {
+        'prose-narrow': '38rem',
+        'prose-wide': '44rem',
+        'content': '80rem',
+      },
+      transitionDuration: {
+        '700': '700ms',
+        '1000': '1000ms',
+      },
+      transitionTimingFunction: {
+        'elegant': 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.96)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'slide-right': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'fade-in': 'fade-in 0.8s ease forwards',
+        'scale-in': 'scale-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'slide-right': 'slide-right 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+      },
+    },
+  },
+  plugins: [],
+};
