@@ -1,14 +1,20 @@
 import { useState, type FormEvent } from 'react';
-import { Calendar, MapPin, Clock, Sparkles, Check, AlertCircle, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Clock, Sparkles, Check, ArrowUpRight, Quote, Globe, Heart, Users, Music } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { Reveal } from '@/components/Reveal';
 import { Button } from '@/components/Button';
 import { SectionHeading } from '@/components/SectionHeading';
 import { Field } from '@/components/Field';
-import { images, diasporaBallInfo, formDisclaimer, enquiryCategories } from '@/data/siteData';
+import {
+  images,
+  diasporaBallInfo,
+  diasporaTestimonials,
+  siteConfig,
+  formDisclaimer,
+} from '@/data/siteData';
 
 export function DiasporaBallPage() {
-  const [form, setForm] = useState({ name: '', email: '', category: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
@@ -17,8 +23,6 @@ export function DiasporaBallPage() {
     if (!form.name.trim()) e.name = 'Please enter your full name.';
     if (!form.email.trim()) e.email = 'Please enter your email address.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Please enter a valid email address.';
-    if (!form.category) e.category = 'Please select how you would like to participate.';
-    if (!form.message.trim()) e.message = 'Please tell us a bit more.';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -29,7 +33,7 @@ export function DiasporaBallPage() {
     setStatus('loading');
     setTimeout(() => {
       setStatus('success');
-      setForm({ name: '', email: '', category: '', message: '' });
+      setForm({ name: '', email: '' });
     }, 1500);
   };
 
@@ -40,19 +44,44 @@ export function DiasporaBallPage() {
     { icon: Sparkles, label: 'Dress Code', value: diasporaBallInfo.dressCode },
   ];
 
-  const categoryOptions = [
-    { value: 'guest', label: 'Interested in attending' },
-    { value: 'sponsor', label: 'Sponsorship enquiry' },
-    { value: 'partner', label: 'Partnership opportunity' },
-    { value: 'media', label: 'Media / press' },
-    { value: 'other', label: 'Other' },
+  const whyAttend = [
+    {
+      icon: Globe,
+      title: 'Global Connections',
+      text: 'Meet Nigerians from Lagos and around the world: founders, professionals, creatives, executives, and changemakers, in a room designed for genuine connection.',
+    },
+    {
+      icon: Sparkles,
+      title: 'Culture, Reimagined',
+      text: 'Experience contemporary Nigerian culture through fashion, food, music, and entertainment — celebrating home with a global perspective.',
+    },
+    {
+      icon: Heart,
+      title: 'Celebrate Home',
+      text: 'Come home to the music, the people, the energy, and the culture.',
+    },
+    {
+      icon: Users,
+      title: 'The People in the Room',
+      text: 'An accomplished global Nigerian community across industries, cities, and generations. Come with your circle. Leave with a bigger one.',
+    },
+    {
+      icon: Music,
+      title: 'A Night Worth Dressing For',
+      text: 'An elevated evening of exceptional food, entertainment, style, and celebration — one of the standout experiences of December in Lagos.',
+    },
+    {
+      icon: Globe,
+      title: 'Connections That Travel',
+      text: 'From friendships to collaborations and business opportunities, some of the best connections happen when Nigerians from different worlds find themselves in the same room.',
+    },
   ];
 
   return (
     <>
       <SEO
-        title="The Diaspora Ball 2026 — A Gala Connecting Nigeria & the Diaspora"
-        description="The Diaspora Ball is an annual gala bringing together the Nigerian diaspora and the Lagos social scene. December 28, 2026 at the Oriental Hotel, Lagos. Black tie."
+        title="The Diaspora Ball 2026 — Where Ambition Meets Elegance · Lagos"
+        description="The Diaspora Ball is a Nigerian diaspora event in Lagos every December. One night. Nigerians from around the world. Culture, connection, celebration. December 28, 2026 at the Oriental Hotel, Lagos."
         image={images.diasporaHero}
         path="/diaspora-ball"
       />
@@ -72,29 +101,28 @@ export function DiasporaBallPage() {
           <div className="mx-auto max-w-content px-6 lg:px-10">
             <div className="max-w-3xl">
               <Reveal>
-                <p className="eyebrow-light mb-6">The Diaspora Ball · 2026</p>
+                <p className="eyebrow-light mb-6">The Diaspora Ball · {diasporaBallInfo.tagline}</p>
               </Reveal>
               <Reveal delay={120}>
                 <h1 className="text-display-1 font-serif font-bold text-ivory-200 text-balance leading-[1.05]">
-                  An evening of<br /><span className="text-gold-400 italic">culture & connection.</span>
+                  Where ambition meets<br /><span className="text-gold-400 italic">elegance.</span>
                 </h1>
               </Reveal>
               <Reveal delay={240}>
                 <p className="mt-8 text-lead text-ivory-200/70 max-w-xl text-pretty">
-                  A formal gala bringing the Nigerian diaspora and the Lagos social scene together for a night of celebration, ambition, and shared identity.
+                  One night. Nigerians from around the world. Culture. Connection. Celebration — in one room, in Lagos.
                 </p>
               </Reveal>
               <Reveal delay={360}>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                  <Button to="/#enquire" variant="secondary" size="lg" onClick={() => {
-                    document.getElementById('enquire')?.scrollIntoView({ behavior: 'smooth' });
-                  }}>
-                    Express Interest
+                  <Button href={siteConfig.ventureLinks.diasporaBall} variant="secondary" size="lg">
+                    Visit DiasporaBall.com
+                    <ArrowUpRight size={16} />
                   </Button>
-                  <Button to="/#details" variant="outline" size="lg" className="!text-ivory-200 !border-ivory-200/30 hover:!bg-ivory-200 hover:!text-forest-700 hover:!border-ivory-200" onClick={() => {
-                    document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' });
+                  <Button to="/#mailing" variant="outline" size="lg" className="!text-ivory-200 !border-ivory-200/30 hover:!bg-ivory-200 hover:!text-forest-700 hover:!border-ivory-200" onClick={() => {
+                    document.getElementById('mailing')?.scrollIntoView({ behavior: 'smooth' });
                   }}>
-                    Event Details
+                    Get on the List
                   </Button>
                 </div>
               </Reveal>
@@ -103,53 +131,16 @@ export function DiasporaBallPage() {
         </div>
       </section>
 
-      {/* Event details */}
-      <section id="details" className="py-24 lg:py-32 bg-forest-700 bg-grain">
-        <div className="mx-auto max-w-content px-6 lg:px-10">
-          <div className="text-center mb-14">
-            <Reveal>
-              <p className="eyebrow-light mb-4">Event Information</p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h2 className="text-heading-1 font-serif font-bold text-ivory-200 text-balance">The details.</h2>
-            </Reveal>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto">
-            {eventDetails.map((detail, i) => (
-              <Reveal key={detail.label} delay={i * 80}>
-                <div className="text-center p-8 border border-ivory-200/10 hover:border-gold-400/30 transition-colors duration-500">
-                  <detail.icon size={28} className="text-gold-400 mx-auto mb-4" />
-                  <p className="text-xs uppercase tracking-[0.18em] text-ivory-200/40 font-semibold mb-2">{detail.label}</p>
-                  <p className="text-base font-serif text-ivory-200">{detail.value}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={300}>
-            <p className="mt-10 text-center text-xs text-ivory-200/40 max-w-lg mx-auto">
-              Please verify all event details with the organisers before making arrangements. Ticketing information will be published once confirmed.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Purpose */}
+      {/* About the Ball */}
       <section className="py-24 lg:py-32 bg-ivory-200">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             <div className="lg:col-span-6">
               <SectionHeading
-                eyebrow="The Purpose"
-                title="More than a gala."
-                description="The Diaspora Ball exists to celebrate and strengthen the bond between Nigerians at home and abroad — a space where culture, ambition, and community converge in a single, memorable evening."
+                eyebrow="About the Ball"
+                title="Where the global Nigerian community comes together."
+                description="The Diaspora Ball is a Nigerian diaspora event bringing together Nigerians at home and around the world for an unforgettable night of culture, conversation, food, fashion, music, and celebration. Held in Lagos every December, it is where the global Nigerian community comes together, where old connections are renewed, new ones are made, and different stories, experiences, and perspectives meet in one room."
               />
-              <Reveal delay={200}>
-                <p className="mt-6 text-base text-charcoal-500 leading-relaxed text-pretty">
-                  Each year, the event brings together professionals, creatives, entrepreneurs, and community leaders for a night of formal celebration and meaningful connection. It is a testament to the enduring ties between Lagos and the global diaspora.
-                </p>
-              </Reveal>
             </div>
             <div className="lg:col-span-6">
               <Reveal direction="left">
@@ -165,21 +156,103 @@ export function DiasporaBallPage() {
         </div>
       </section>
 
-      {/* Gallery */}
+      {/* Event details */}
+      <section id="details" className="py-24 lg:py-32 bg-forest-700 bg-grain">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <Reveal>
+              <p className="eyebrow-light mb-4">The Next Edition — Diaspora Ball 2026</p>
+            </Reveal>
+            <Reveal delay={80}>
+              <h2 className="text-heading-1 font-serif font-bold text-ivory-200 text-balance">
+                {diasporaBallInfo.tagline}
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            {eventDetails.map((detail, i) => (
+              <Reveal key={detail.label} delay={i * 80}>
+                <div className="text-center p-8 border border-ivory-200/10 hover:border-gold-400/30 transition-colors duration-500">
+                  <detail.icon size={28} className="text-gold-400 mx-auto mb-4" />
+                  <p className="text-xs uppercase tracking-[0.18em] text-ivory-200/40 font-semibold mb-2">{detail.label}</p>
+                  <p className="text-base font-serif text-ivory-200">{detail.value}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Attend */}
+      <section className="py-24 lg:py-32 bg-ivory-200">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <SectionHeading
+            eyebrow="Why Attend"
+            title="Six reasons to be in the room."
+            className="mb-14"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            {whyAttend.map((item, i) => (
+              <Reveal key={item.title} delay={i * 80}>
+                <div className="border-t border-charcoal-700/15 pt-6">
+                  <item.icon size={24} className="text-gold-500 mb-4" />
+                  <h3 className="text-heading-3 font-serif font-bold text-forest-700 mb-3">{item.title}</h3>
+                  <p className="text-sm text-charcoal-500 leading-relaxed text-pretty">{item.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The First Edition */}
       <section className="py-24 lg:py-32 bg-ivory-100">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            <div className="lg:col-span-6">
+              <Reveal direction="right">
+                <img
+                  src={images.diasporaEvent2}
+                  alt="The first Diaspora Ball — December 2025"
+                  className="w-full aspect-[4/3] object-cover"
+                  loading="lazy"
+                />
+              </Reveal>
+            </div>
+            <div className="lg:col-span-6">
+              <SectionHeading
+                eyebrow="The First Edition — December 2025"
+                title="Only the beginning."
+                description="The inaugural Diaspora Ball brought Nigerians at home and across the diaspora together in Lagos for an unforgettable night of culture, connection, and celebration. From fashion and food to music, entertainment, and conversations that became new connections, the first edition brought the spirit of Nigeria and its global community into one room."
+              />
+              <Reveal delay={200}>
+                <p className="mt-6 text-base text-charcoal-500 leading-relaxed text-pretty">
+                  It was the first Ball, and only the beginning.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section className="py-24 lg:py-32 bg-forest-700 bg-grain">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <SectionHeading
             eyebrow="The Atmosphere"
             title="A glimpse of the evening."
+            dark
             align="center"
             className="mb-14"
           />
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {[
-              { src: images.diasporaEvent2, alt: 'Stylish couple in formal attire at a glamorous event' },
               { src: images.diasporaEvent3, alt: 'Group in elegant evening wear posing together' },
               { src: images.diasporaEvent4, alt: 'Couple in formal attire against an illuminated wall' },
               { src: images.diasporaEvent5, alt: 'Lively dinner event with live music' },
+              { src: images.diasporaEvent1, alt: 'Elegant evening event reception' },
             ].map((img, i) => (
               <Reveal key={i} delay={(i % 4) * 80}>
                 <div className="group relative overflow-hidden">
@@ -194,30 +267,49 @@ export function DiasporaBallPage() {
               </Reveal>
             ))}
           </div>
-          <Reveal delay={200}>
-            <p className="mt-10 text-center text-xs text-charcoal-400 max-w-lg mx-auto">
-              Images are illustrative and represent the atmosphere of the event. Official photography from previous editions will be added as it becomes available.
-            </p>
-          </Reveal>
         </div>
       </section>
 
-      {/* Enquiry form */}
-      <section id="enquire" className="py-24 lg:py-32 bg-forest-700 bg-grain">
+      {/* Testimonials */}
+      <section className="py-24 lg:py-32 bg-ivory-200">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <SectionHeading
+            eyebrow="Testimonials"
+            title="Voices from the first Ball."
+            align="center"
+            className="mb-14"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            {diasporaTestimonials.map((testimonial, i) => (
+              <Reveal key={i} delay={i * 120}>
+                <div className="bg-ivory-100 p-8 lg:p-10 flex flex-col h-full">
+                  <Quote size={28} className="text-gold-400 mb-6" />
+                  <p className="text-base text-charcoal-500 leading-relaxed italic text-pretty flex-1">
+                    {testimonial.quote}
+                  </p>
+                  <div className="mt-8 pt-6 border-t border-charcoal-700/10">
+                    <p className="text-sm font-semibold text-forest-700">{testimonial.name}</p>
+                    <p className="text-xs text-charcoal-400 mt-1">{testimonial.role}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mailing List CTA */}
+      <section id="mailing" className="py-24 lg:py-32 bg-forest-700 bg-grain">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             <div className="lg:col-span-5">
               <SectionHeading
-                eyebrow="Express Interest"
-                title="Join the guest list."
-                description="Whether you're interested in attending, sponsoring, partnering, or covering the event — we'd love to hear from you."
+                eyebrow="Mailing List"
+                title="Coming home? Get on the list."
+                description="Your inside track to The Diaspora Ball and December in Lagos — first access to tickets, event announcements, exclusive experiences, and curated recommendations for making the most of the season."
                 dark
               />
-              <Reveal delay={200}>
-                <p className="mt-6 text-xs text-ivory-200/40 leading-relaxed max-w-sm">
-                  {formDisclaimer}
-                </p>
-              </Reveal>
             </div>
 
             <div className="lg:col-span-7">
@@ -227,37 +319,37 @@ export function DiasporaBallPage() {
                     <div className="w-14 h-14 rounded-full bg-gold-400/20 flex items-center justify-center mb-6">
                       <Check size={28} className="text-gold-600" />
                     </div>
-                    <h3 className="text-heading-2 font-serif font-bold text-forest-700 mb-3">Thank you</h3>
+                    <h3 className="text-heading-2 font-serif font-bold text-forest-700 mb-3">You're on the list</h3>
                     <p className="text-sm text-charcoal-500 max-w-sm">
-                      Your interest has been noted. {formDisclaimer}
+                      Thank you for joining the mailing list. We'll be in touch with updates as The Diaspora Ball 2026 approaches.
                     </p>
                     <button
                       onClick={() => setStatus('idle')}
                       className="mt-8 text-sm font-semibold uppercase tracking-[0.12em] text-gold-600 hover:text-gold-500 transition-colors"
                     >
-                      Submit another response
+                      Submit another email
                     </button>
                   </div>
                 </Reveal>
               ) : (
                 <Reveal>
                   <form onSubmit={handleSubmit} className="bg-ivory-200 p-8 lg:p-10" noValidate>
-                    <Field label="Full Name" name="name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} required placeholder="Your name" />
+                    <Field label="Full Name" name="name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} required placeholder="Your full name" />
                     <Field label="Email Address" name="email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} required placeholder="you@email.com" />
-                    <Field label="I am interested as..." name="category" type="select" value={form.category} onChange={(v) => setForm({ ...form, category: v })} error={errors.category} required options={categoryOptions} />
-                    <Field label="Message" name="message" type="textarea" value={form.message} onChange={(v) => setForm({ ...form, message: v })} error={errors.message} required placeholder="Tell us about yourself and your interest in The Diaspora Ball..." rows={4} />
 
                     {Object.keys(errors).length > 0 && (
                       <div className="flex items-center gap-2 mb-4 text-sm text-red-500">
-                        <AlertCircle size={16} />
                         <span>Please correct the highlighted fields above.</span>
                       </div>
                     )}
 
                     <Button type="submit" variant="primary" size="md" disabled={status === 'loading'}>
-                      {status === 'loading' ? 'Submitting...' : 'Submit'}
-                      {status !== 'loading' && <ArrowRight size={16} />}
+                      {status === 'loading' ? 'Joining...' : 'Join the List'}
+                      {status !== 'loading' && <ArrowUpRight size={16} />}
                     </Button>
+                    <p className="mt-6 text-xs text-charcoal-400 leading-relaxed">
+                      {formDisclaimer}
+                    </p>
                   </form>
                 </Reveal>
               )}
