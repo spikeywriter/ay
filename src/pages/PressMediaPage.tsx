@@ -1,16 +1,22 @@
-import { Download, Mail, Phone, AlertCircle } from 'lucide-react';
+import { Download, Mail, Phone } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { Reveal } from '@/components/Reveal';
 import { Button } from '@/components/Button';
 import { SectionHeading } from '@/components/SectionHeading';
-import { images, siteConfig } from '@/data/siteData';
+import {
+  images,
+  siteConfig,
+  pressHighlights,
+  mediaBioShort,
+  mediaBioLong,
+} from '@/data/siteData';
 
 export function PressMediaPage() {
   return (
     <>
       <SEO
         title="Press & Media — Ayo Entity"
-        description="Media resources for journalists, publishers, interviewers, and event organisers. Contact Ayo Entity for interviews, features, and speaking opportunities."
+        description="Ayobami Magbagbeola has been featured in outlets spanning business, culture, weddings, and the arts. Media bios, coverage highlights, and press contact information."
         image={images.pressHero}
         path="/press-media"
       />
@@ -33,15 +39,39 @@ export function PressMediaPage() {
             </Reveal>
             <Reveal delay={240}>
               <p className="mt-8 text-lead text-ivory-200/70 max-w-xl text-pretty">
-                A resource for media professionals seeking interviews, commentary, or collaboration with Ayo Entity.
+                Ayobami Magbagbeola has been featured in outlets spanning business, culture, weddings, and the arts — from Vanguard and BellaNaija to Boston Voyager, WeddingWire, Zola, Punch, The Guardian and Yelp. His work sits at the crossroads of entrepreneurship, culture, and community, and he is available for interviews, features, podcasts, and speaking engagements.
               </p>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Approved bio */}
+      {/* Coverage Highlights */}
       <section className="py-24 lg:py-32 bg-ivory-200">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <SectionHeading
+            eyebrow="Coverage Highlights"
+            title="Featured and reviewed."
+            description="Selected media coverage, features, and verified professional profiles."
+            className="mb-14"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {pressHighlights.map((item, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <div className="bg-ivory-100 p-6 lg:p-8 border border-charcoal-700/10 hover:border-gold-400/30 transition-colors duration-500 h-full flex flex-col">
+                  <p className="text-xs uppercase tracking-[0.18em] text-gold-600 font-semibold mb-3">{item.outlet}</p>
+                  <h3 className="text-heading-3 font-serif font-bold text-forest-700 mb-3 leading-snug">{item.title}</h3>
+                  <p className="text-sm text-charcoal-500 leading-relaxed text-pretty flex-1">{item.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Media Bios */}
+      <section className="py-24 lg:py-32 bg-ivory-100">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             <div className="lg:col-span-5">
@@ -56,22 +86,25 @@ export function PressMediaPage() {
             </div>
             <div className="lg:col-span-7">
               <SectionHeading
-                eyebrow="Approved Biography"
-                title="For media use."
-                description="The following short biography is provided for editorial reference. Please confirm with Ayo's team before publication to ensure the most current version."
+                eyebrow="Media Bios"
+                title="For editorial use."
+                description="The following biographies are provided for editorial reference."
               />
+
               <Reveal delay={200}>
-                <div className="mt-8 p-6 lg:p-8 bg-ivory-100 border-l-2 border-gold-400">
+                <div className="mt-8 p-6 lg:p-8 bg-ivory-200 border-l-2 border-gold-400">
+                  <p className="text-xs uppercase tracking-[0.14em] text-gold-600 font-semibold mb-3">Short Bio (~50 words)</p>
                   <p className="text-sm text-charcoal-500 leading-relaxed text-pretty">
-                    Ayobami Magbagbeola, known professionally as Ayo Entity, is a healthcare IT consultant and entrepreneur based in Lagos, Nigeria. He is the founder of Entity Management Group, through which he oversees ventures in photography (Entity Images), luxury transport (LiveryLane), events (The Diaspora Ball), real estate (Entity Properties), and agriculture (Feed-NG). His work is defined by a commitment to connecting Nigeria and its global diaspora through enterprise.
+                    {mediaBioShort}
                   </p>
                 </div>
               </Reveal>
+
               <Reveal delay={280}>
-                <div className="mt-6 flex items-start gap-3 p-4 bg-gold-400/10 border border-gold-400/20">
-                  <AlertCircle size={18} className="text-gold-600 mt-0.5 shrink-0" />
-                  <p className="text-xs text-charcoal-500 leading-relaxed">
-                    This biography is a draft awaiting client approval. Please do not publish without confirmation. A formal, approved version will replace this placeholder.
+                <div className="mt-6 p-6 lg:p-8 bg-ivory-200 border-l-2 border-gold-400">
+                  <p className="text-xs uppercase tracking-[0.14em] text-gold-600 font-semibold mb-3">Long Bio (~150 words)</p>
+                  <p className="text-sm text-charcoal-500 leading-relaxed text-pretty">
+                    {mediaBioLong}
                   </p>
                 </div>
               </Reveal>
@@ -80,39 +113,13 @@ export function PressMediaPage() {
         </div>
       </section>
 
-      {/* Media appearances — placeholder */}
-      <section className="py-24 lg:py-32 bg-ivory-100">
-        <div className="mx-auto max-w-content px-6 lg:px-10">
-          <SectionHeading
-            eyebrow="Coverage & Appearances"
-            title="Interviews and features."
-            description="Verified media appearances, interviews, and features will be listed here as they become available."
-            className="mb-14"
-          />
-
-          <Reveal>
-            <div className="p-12 lg:p-16 text-center border border-dashed border-charcoal-700/20 bg-ivory-200">
-              <p className="text-base text-charcoal-400 leading-relaxed max-w-md mx-auto">
-                No press coverage has been supplied yet. This section will feature real interviews, publications, and appearances once verified.
-              </p>
-              <div className="mt-8">
-                <Button to="/contact" variant="outline" size="md">
-                  <Mail size={16} />
-                  Request an Interview
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Press photos — placeholder */}
+      {/* Press photos */}
       <section className="py-24 lg:py-32 bg-ivory-200">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <SectionHeading
             eyebrow="Press Photographs"
             title="Downloadable images."
-            description="High-resolution press photographs will be available for download here once supplied."
+            description="High-resolution press photographs for editorial use."
             className="mb-14"
           />
 
@@ -122,18 +129,15 @@ export function PressMediaPage() {
                 <div className="group relative overflow-hidden">
                   <img
                     src={img}
-                    alt="Press photo placeholder"
+                    alt="Press photo"
                     className="w-full aspect-[3/4] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-elegant"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-forest-700/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="text-center">
                       <Download size={24} className="text-gold-400 mx-auto mb-2" />
-                      <p className="text-xs uppercase tracking-[0.14em] text-ivory-200">Awaiting file</p>
+                      <p className="text-xs uppercase tracking-[0.14em] text-ivory-200">Download</p>
                     </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-forest-700/60 to-transparent">
-                    <p className="text-xs text-ivory-200/80">Press photo — pending approval</p>
                   </div>
                 </div>
               </Reveal>
@@ -159,10 +163,22 @@ export function PressMediaPage() {
                     <Mail size={18} className="text-gold-400" />
                     <span className="text-sm">{siteConfig.email}</span>
                   </a>
+                  <a href={`mailto:${siteConfig.emailAlt}`} className="flex items-center gap-3 text-ivory-200/70 hover:text-gold-400 transition-colors duration-300 group">
+                    <Mail size={18} className="text-gold-400" />
+                    <span className="text-sm">{siteConfig.emailAlt}</span>
+                  </a>
                   <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-3 text-ivory-200/70 hover:text-gold-400 transition-colors duration-300">
                     <Phone size={18} className="text-gold-400" />
                     <span className="text-sm">{siteConfig.phone}</span>
                   </a>
+                </div>
+              </Reveal>
+              <Reveal delay={280}>
+                <div className="mt-8">
+                  <Button to="/contact" variant="secondary" size="md">
+                    <Mail size={16} />
+                    Request an Interview
+                  </Button>
                 </div>
               </Reveal>
             </div>

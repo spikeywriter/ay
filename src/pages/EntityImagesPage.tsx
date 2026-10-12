@@ -1,9 +1,16 @@
-import { Camera, ArrowRight, Calendar, Heart, Sparkles } from 'lucide-react';
+import { Camera, ArrowUpRight, Calendar, Heart, Sparkles, Quote, Check } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { Reveal } from '@/components/Reveal';
 import { Button } from '@/components/Button';
 import { SectionHeading } from '@/components/SectionHeading';
-import { images, siteConfig } from '@/data/siteData';
+import {
+  images,
+  siteConfig,
+  entityImagesServices,
+  entityImagesClients,
+  entityImagesTestimonial,
+  featuredIn,
+} from '@/data/siteData';
 
 const galleryImages = [
   { src: images.entityImages1, alt: 'Bride and groom sharing an intimate moment by the window', tall: true },
@@ -20,8 +27,8 @@ export function EntityImagesPage() {
   return (
     <>
       <SEO
-        title="Entity Images — Wedding & Event Photography by Ayo Entity"
-        description="Entity Images specialises in weddings, events, and milestone celebrations. Editorial photography with genuine emotion, established in 2009."
+        title="Entity Images — Award-Winning Wedding & Event Photography by Ayo Entity"
+        description="Entity Images — international wedding and event photojournalism. Based in Boston, shooting worldwide since 2009. Trusted by Harvard Business School, Mo Abudu, and more."
         image={images.entityImagesHero}
         path="/entity-images"
       />
@@ -43,17 +50,17 @@ export function EntityImagesPage() {
               <Reveal>
                 <div className="flex items-center gap-3 mb-6">
                   <Camera size={24} className="text-gold-400" />
-                  <p className="eyebrow-light">Entity Images · Est. 2009</p>
+                  <p className="eyebrow-light">Entity Images · Est. 2009 · Boston</p>
                 </div>
               </Reveal>
               <Reveal delay={120}>
                 <h1 className="text-display-2 font-serif font-bold text-ivory-200 text-balance leading-[1.08]">
-                  Stories told through<br /><span className="text-gold-400 italic">light and moment.</span>
+                  International wedding &<br />event <span className="text-gold-400 italic">photojournalism.</span>
                 </h1>
               </Reveal>
               <Reveal delay={240}>
                 <p className="mt-6 text-lead text-ivory-200/70 max-w-lg text-pretty">
-                  A photography business dedicated to weddings, events, and the milestones that deserve to be remembered with beauty and feeling.
+                  Based in Boston, shooting the world — capturing weddings and events across the U.S., Europe, Africa, and the Caribbean since 2009.
                 </p>
               </Reveal>
             </div>
@@ -61,7 +68,24 @@ export function EntityImagesPage() {
         </div>
       </section>
 
-      {/* Intro / About the service */}
+      {/* Quote */}
+      <section className="py-16 lg:py-20 bg-forest-700 bg-grain">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10 text-center">
+          <Reveal>
+            <Quote size={28} className="text-gold-400 mx-auto mb-6" />
+          </Reveal>
+          <Reveal delay={80}>
+            <blockquote className="text-heading-2 font-serif italic text-ivory-200 text-balance leading-snug">
+              "There is one thing the photograph must contain, the humanity of the moment."
+            </blockquote>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mt-4 text-sm text-gold-400 uppercase tracking-[0.14em]">— Robert Frank</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* About */}
       <section className="py-24 lg:py-32 bg-ivory-200">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -77,11 +101,16 @@ export function EntityImagesPage() {
             </div>
             <div className="lg:col-span-6">
               <SectionHeading
-                eyebrow="The Service"
-                title="Photography with an editorial eye."
-                description="Entity Images approaches every wedding and event as a story — capturing the grand moments and the quiet ones, the planned and the spontaneous, with a style that blends editorial composition with genuine emotion."
+                eyebrow="About Entity Images"
+                title="The art of observation."
+                description="Founded in 2009 by Ayobami Magbagbeola, Entity Images is an award-winning photography and event production company based in Boston, Massachusetts. Though rooted in Boston, the team travels worldwide — shooting weddings and events across the continental United States, Europe, Africa, and the Caribbean."
               />
               <Reveal delay={200}>
+                <p className="mt-6 text-base text-charcoal-500 leading-relaxed text-pretty">
+                  Photojournalism is at the heart of the Entity Images approach: capturing every facet of a special day as it unfolds, bringing documentary authenticity to images that remain meaningful for decades to come. To Entity Images, photography is the art of observation, finding something extraordinary in an ordinary place. It has little to do with the things you see, and everything to do with the way you see them.
+                </p>
+              </Reveal>
+              <Reveal delay={280}>
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {[
                     { icon: Calendar, label: 'Weddings', sub: 'Full-day coverage' },
@@ -101,13 +130,34 @@ export function EntityImagesPage() {
         </div>
       </section>
 
-      {/* Gallery */}
+      {/* Services */}
       <section className="py-24 lg:py-32 bg-ivory-100">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <SectionHeading
+            eyebrow="Services"
+            title="What we cover."
+            className="mb-12"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {entityImagesServices.map((service, i) => (
+              <Reveal key={service} delay={i * 80}>
+                <div className="flex items-start gap-3 border-t border-charcoal-700/15 pt-5">
+                  <Check size={18} className="text-gold-500 mt-0.5 shrink-0" />
+                  <p className="text-sm font-semibold text-forest-700 leading-snug">{service}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section className="py-24 lg:py-32 bg-ivory-200">
         <div className="mx-auto max-w-content px-6 lg:px-10">
           <SectionHeading
             eyebrow="Portfolio"
             title="Selected work."
-            description="A gallery showcasing the range and quality of Entity Images photography. These are illustrative images representing the style and standard of the work."
+            description="A gallery showcasing the range and quality of Entity Images photography."
             align="center"
             className="mb-14"
           />
@@ -127,11 +177,66 @@ export function EntityImagesPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Selected Clients */}
+      <section className="py-24 lg:py-32 bg-forest-700 bg-grain">
+        <div className="mx-auto max-w-content px-6 lg:px-10">
+          <SectionHeading
+            eyebrow="Selected Clients & Notable Figures"
+            title="Trusted by institutions and individuals."
+            dark
+            align="center"
+            className="mb-12"
+          />
+          <Reveal delay={120}>
+            <div className="flex flex-wrap items-center justify-center gap-x-8 lg:gap-x-12 gap-y-4 max-w-4xl mx-auto">
+              {entityImagesClients.map((client) => (
+                <span
+                  key={client}
+                  className="text-lg lg:text-xl font-serif text-ivory-200/50 hover:text-gold-400 transition-colors duration-300 cursor-default"
+                >
+                  {client}
+                </span>
+              ))}
+            </div>
+          </Reveal>
 
           <Reveal delay={200}>
-            <p className="mt-12 text-center text-xs text-charcoal-400 max-w-lg mx-auto">
-              Note: The images above are licensed photographs used to represent the style and quality of Entity Images work. They will be replaced with the studio's actual portfolio prior to launch.
+            <div className="mt-12 pt-8 border-t border-ivory-200/10 max-w-4xl mx-auto">
+              <p className="eyebrow-light text-center mb-6">As Featured In</p>
+              <div className="flex flex-wrap items-center justify-center gap-x-8 lg:gap-x-12 gap-y-4">
+                {featuredIn.map((outlet) => (
+                  <span
+                    key={outlet}
+                    className="text-base lg:text-lg font-serif text-ivory-200/40 hover:text-gold-400 transition-colors duration-300 cursor-default"
+                  >
+                    {outlet}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className="py-24 lg:py-32 bg-ivory-100">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+          <Reveal>
+            <Quote size={32} className="text-gold-400 mx-auto mb-8" />
+          </Reveal>
+          <Reveal delay={80}>
+            <blockquote className="text-heading-2 font-serif italic text-forest-700 text-balance leading-snug text-center">
+              {entityImagesTestimonial.quote}
+            </blockquote>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mt-6 text-center text-sm text-charcoal-500">
+              — {entityImagesTestimonial.name}
             </p>
+            <p className="text-center text-xs text-charcoal-400 mt-1">{entityImagesTestimonial.role}</p>
           </Reveal>
         </div>
       </section>
@@ -141,24 +246,29 @@ export function EntityImagesPage() {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <Reveal>
             <h2 className="text-display-3 font-serif font-bold text-ivory-200 text-balance">
-              Have an event to capture?
+              Planning a wedding or event?
             </h2>
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-6 text-lead text-ivory-200/60 text-pretty">
-              Enquire about availability, packages, and booking for weddings and events.
+              Entity Images is booking worldwide. Visit EntityImages.com to explore the portfolio and enquire about availability.
             </p>
           </Reveal>
           <Reveal delay={200}>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button to="/contact" variant="secondary" size="lg">
+              <Button href={siteConfig.ventureLinks.entityImages} variant="secondary" size="lg">
+                Visit EntityImages.com
+                <ArrowUpRight size={16} />
+              </Button>
+              <Button to="/contact" variant="outline" size="lg" className="!text-ivory-200 !border-ivory-200/30 hover:!bg-ivory-200 hover:!text-forest-700 hover:!border-ivory-200">
                 Make an Enquiry
               </Button>
-              <Button href={siteConfig.social.instagram} variant="outline" size="lg" className="!text-ivory-200 !border-ivory-200/30 hover:!bg-ivory-200 hover:!text-forest-700 hover:!border-ivory-200">
-                <ArrowRight size={16} />
-                View on Instagram
-              </Button>
             </div>
+          </Reveal>
+          <Reveal delay={280}>
+            <p className="mt-8 text-sm text-ivory-200/40">
+              Instagram: <a href="https://www.instagram.com/entityimages" target="_blank" rel="noopener noreferrer" className="text-gold-400 hover:text-gold-300 transition-colors">@entityimages</a>
+            </p>
           </Reveal>
         </div>
       </section>
